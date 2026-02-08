@@ -1,11 +1,15 @@
 [
   {
-    "relation": ["delegate_permission/common.handle_all_urls"],
+    "relation": [
+      "delegate_permission/common.handle_all_urls",
+      "delegate_permission/common.get_login_creds"
+    ],
     "target": {
       "namespace": "android_app",
       "package_name": "com.informatica.app",
       "sha256_cert_fingerprints": [
-        "22:05:BE:FD:4E:68:E6:F9:27:87:33:ED:23:73:70:94:3A:D4:FE:0F:44:BB:9B:DF:62:64:A6:0D:84:45:F6:A0"
+        "22:05:BE:FD:4E:68:E6:F9:27:87:33:ED:23:73:70:94:3A:D4:FE:0F:44:BB:9B:DF:62:64:A6:0D:84:45:F6:A0",
+        "0B:B1:2F:77:B5:E9:ED:AF:BC:0B:BC:C8:F4:BA:98:F2:F3:99:AB:C2:76:0A:2A:E0:36:36:96:DE:EB:C6:CD:49"
       ]
     }
   }
