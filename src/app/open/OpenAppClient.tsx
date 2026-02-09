@@ -7,6 +7,11 @@ import { Card, CardContent, CardDescription, CardFooter, CardHeader, CardTitle }
 
 const ANDROID_PACKAGE = "com.informatica.app";
 
+type OpenAppClientProps = {
+  defaultUrl?: string;
+  defaultAuto?: boolean;
+};
+
 function buildIntentUrl(destination: URL, fallbackUrl: string) {
   const scheme = destination.protocol.replace(":", "");
   const pathAndQuery = `${destination.pathname}${destination.search}${destination.hash}`;
@@ -23,7 +28,7 @@ function isIOS(ua: string) {
   return /iPhone|iPad|iPod/i.test(ua);
 }
 
-export default function OpenAppClient() {
+export default function OpenAppClient({ defaultUrl, defaultAuto }: OpenAppClientProps) {
   const searchParams = useSearchParams();
   const [mounted, setMounted] = React.useState(false);
   const [error, setError] = React.useState<string | null>(null);
@@ -32,8 +37,9 @@ export default function OpenAppClient() {
     setMounted(true);
   }, []);
 
-  const destinationParam = searchParams.get("url") ?? "/";
-  const auto = searchParams.get("auto") === "1";
+  const destinationParam = searchParams.get("url") ?? defaultUrl ?? "/";
+  const autoParam = searchParams.get("auto");
+  const auto = autoParam === "1" || (autoParam === null && Boolean(defaultAuto));
 
   const playStoreUrl =
     process.env.NEXT_PUBLIC_PLAYSTORE_URL ??
@@ -145,4 +151,3 @@ export default function OpenAppClient() {
     </main>
   );
 }
-
