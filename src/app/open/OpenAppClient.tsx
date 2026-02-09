@@ -81,8 +81,8 @@ export default function OpenAppClient({ defaultUrl, defaultAuto }: OpenAppClient
   }, [auto, mounted, openApp]);
 
   const ua = mounted ? navigator.userAgent ?? "" : "";
-  const showPlayStore = mounted ? isAndroid(ua) : true;
-  const showAppStore = mounted ? isIOS(ua) && Boolean(appStoreUrl) : Boolean(appStoreUrl);
+  const showPlayStore = mounted && isAndroid(ua);
+  const showAppStore = mounted && isIOS(ua) && Boolean(appStoreUrl);
 
   return (
     <main className="min-h-[70vh] px-6 py-12 flex items-center justify-center">
@@ -97,7 +97,7 @@ export default function OpenAppClient({ defaultUrl, defaultAuto }: OpenAppClient
         <CardContent className="space-y-3">
           <div className="text-sm text-muted-foreground break-all">
             Destino:{" "}
-            <a className="underline underline-offset-2" href={destinationHref}>
+            <a className="!text-muted-foreground underline underline-offset-2" href={destinationHref}>
               {destinationHref}
             </a>
           </div>
@@ -113,14 +113,14 @@ export default function OpenAppClient({ defaultUrl, defaultAuto }: OpenAppClient
           <button
             type="button"
             onClick={openApp}
-            className="inline-flex items-center justify-center rounded-md bg-black text-white px-4 py-2 text-sm font-medium"
+            className="inline-flex items-center justify-center rounded-md bg-primary text-primary-foreground px-4 py-2 text-sm font-medium hover:bg-primary/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
           >
             Abrir la app
           </button>
 
           {showPlayStore ? (
             <a
-              className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium"
+              className="inline-flex items-center justify-center rounded-md border border-border bg-secondary text-secondary-foreground px-4 py-2 text-sm font-medium hover:bg-secondary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               href={playStoreUrl}
               rel="noreferrer"
               target="_blank"
@@ -131,7 +131,7 @@ export default function OpenAppClient({ defaultUrl, defaultAuto }: OpenAppClient
 
           {showAppStore ? (
             <a
-              className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium"
+              className="inline-flex items-center justify-center rounded-md border border-border bg-secondary text-secondary-foreground px-4 py-2 text-sm font-medium hover:bg-secondary/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
               href={appStoreUrl}
               rel="noreferrer"
               target="_blank"
@@ -141,7 +141,7 @@ export default function OpenAppClient({ defaultUrl, defaultAuto }: OpenAppClient
           ) : null}
 
           <a
-            className="inline-flex items-center justify-center rounded-md border px-4 py-2 text-sm font-medium"
+            className="inline-flex items-center justify-center rounded-md border border-border px-4 py-2 text-sm font-medium hover:bg-accent hover:text-accent-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
             href={destinationHref}
           >
             Continuar en la web

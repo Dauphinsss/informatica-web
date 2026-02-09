@@ -34,7 +34,9 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} ${poppins.variable} antialiased`}
       >
-        <TextCircleFollower />
+        <div className="hidden md:block">
+          <TextCircleFollower />
+        </div>
         {children}
       </body>
     </html>
